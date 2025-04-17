@@ -1,0 +1,57 @@
+1.        Search for VPC
+2.        Create VPC Network
+3.           Name it whatever
+4.          Copy name into description
+5.          Subnet creation mode = Custom   
+6.          IPv4 Range = 10.28.0.0/16
+7.        Subnet name = “iowamain”
+8.          Copy name into description
+9.          Region = us-central1
+10.         IP Stack Type = IPv4 (single-stack)
+11.       Iowa = 10.28.10.0/24   Tokyo = 10.28.85.0/24    Sao Paolo = 10.28.66.0/24
+12.       Add another subnet, name it Tokyo main
+13.         Copy name into description
+14.         Region = asia-northeast1
+15.         Put in Tokyo IPv4 range from step #11
+16.       Add another subnet, name it Saopaolo main
+17.         Copy name into description
+18.         Region = southamerica-east1
+19.         Put in SaoPaolo IPv4 range from step #11
+20.       Configure Firewall rules
+a.          Allow Ping
+b.          Allow SSH
+21.       Scroll to bottom and click Equivalent command line to see available commands
+22.       Keep everything else default and click create
+23.       At top click delete VPC network
+24.       Copy and paste name and click delete
+
+
+
+ Private Address Space
+
+   The Internet Assigned Numbers Authority (IANA) has reserved the
+   following three blocks of the IP address space for private internets:
+
+  CLASS A   10.0.0.0        -   10.255.255.255  (10/8 prefix)
+  CLASS B   172.16.0.0      -   172.31.255.255  (172.16/12 prefix)
+  CLASS C   192.168.0.0     -   192.168.255.255 (192.168/16 prefix)
+
+You have 4 Octets:
+0-255
+
+First Octet = 10 = CLASS A Private Network
+Second Octet = 0-255 = Your Network 
+Third Octet = 0-255 = Your Subnet
+Fourth Octet = 1-254 = Your Host
+
+10.25.9.19/24
+
+Region 
+
+10.2-255. 
+10.0.0.0 = DON'T USE!!!!
+
+
+IOWA = 10.25.10.0/24
+Tokyo = 10.25.97.0/24
+Sao Paulo = 10.25.48.0/24
