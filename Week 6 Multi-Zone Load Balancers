@@ -1,0 +1,209 @@
+1.	Create new VPC
+  a.	Name = Globalvpc01
+  b.	Description = globalvpc01
+2.	Add subnet
+  a.	New Subnet name = tokyo01
+  b.	Description = tokyo01
+  c.	Region = Asianortheast1
+  d.	Range = 10.25.96.0/24
+  e.	Google access = on
+  f.	Flow logs = on
+3.	Add  subnet
+  a.	Name = saopaolo01
+  b.	Description = saopaolo01
+  c.	Region = southamerica-east1
+  d.	Range = 10.25.48.0/24
+  e.	Google access = on
+  f.	Flow logs = on
+4.	Add subnet
+  a.	Name = belgium01
+  b.	Description = belgium01
+  c.	Region = Europewest1
+  d.	Range = 10.25.22.0/24
+  e.	Google access = on
+  f.	Flow logs = on
+5.	Add subnet
+  a.	iowahusk01
+  b.	Description = iowahusk01
+  c.	Us-central1
+  d.	Range = 10.25.250.0/24
+  e.	Google access = on
+  f.	Flow logs = on
+6.	Dynamic routing mode = global
+7.	Create
+
+8.	Open new tab and Search instance template 
+9.	Create new instance template
+  a.	Name = globalvpctemplate01
+  b.	Description = globalvpctemplate01
+  c.	Location = global
+  d.	E2 = series machine config
+  e.	Under firewall click the box for allow load balance health checks
+  f.	Scroll down and click on advanced options
+  g.	Go to network and hit the drop down arrow
+  h.	Change network from default to globalvpc01
+  i.	Subnet = belgium
+  j.	Add tags = globalvpcapp01
+  k.	Scroll to Allow IP ranges
+  l.	Change External IPv4 address from Ephemeral to none
+  m.	Scroll down and click drop down arrow for management and add script in automation box
+  n.	https://github.com/MaurceDriver/GCP-startup-script-template/blob/main/new-class-template.sh 
+  o.	Create
+10.	Create new instance template
+  a.	Name = tokyovpctemplate01
+  b.	Description = tokyovpctemplate01
+  c.	Location = global
+  d.	E2 = series machine config
+  e.	Under firewall click the box for allow load balance health checks
+  f.	Scroll down and click on advanced options
+  g.	Go to network and hit the drop down arrow
+  h.	Change network from default to globalvpc01
+  i.	Subnet = tokyo01
+  j.	Add tags = tokyohttp01
+  k.	Scroll to Allow IP ranges
+  l.	Change External IPv4 address  from Ephemeral to none
+  m.	Scroll down and click drop down arrow for management and add script in automation box
+  n.	https://github.com/MaurceDriver/GCP-startup-script-template/blob/main/new-class-template.sh 
+  o.	Create
+
+11.	Open new tab and search cloud nat
+  a.	Click get started
+  b.	Gateway name = globalvpcnat01
+  c.	NAT type = Public 
+  d.	Network = globalvpc01
+  e.	Region = southamerica east 1
+12.	Click Cloud router and create new router
+  a.	Name = globalvpcrouter01
+  b.	Description = globalvpcrouter01
+  c.	Create
+13.	Create another cloud nat for Tokyo
+  a.	Gateway name = globalvpcnat02
+  b.	NAT type = Public 
+  c.	Network = globalvpc01
+  d.	Region = asianortheast1
+14.	Click Cloud router and create new router
+  a.	Name = globalvpcrouter02
+  b.	Description = globalvpcrouter02
+  c.	Create
+15.	Create another cloud nat for belgium
+  a.	Gateway name = globalvpcnat03
+  b.	NAT type = Public 
+  c.	Network = globalvpc01
+  d.	Region = europewest 1
+16.	Click Cloud router and create new router
+  a.	Name = globalvpcrouter03
+  b.	Description = globalvpcrouter03
+  c.	Create
+17.	Create another cloud nat for iowa
+  a.	Gateway name = globalvpcnat04
+  b.	NAT type = Public 
+  c.	Network = globalvpc01
+  d.	Region = us central1
+18.	Click Cloud router and create new router
+  a.	Name = globalvpcrouter04
+  b.	Description = globalvpcrouter04
+  c.	Create
+
+19.	Search instance group
+20.	Create instance group
+  a.	Name = globalinstancegroup01
+  b.	Description = globalinstancegroup01
+  c.	Instance template = globalvpctemplate01
+  d.	Location = multiple zones
+  e.	Region = europewest1
+  f.	Autoscaling min = 2
+  g.	Autoscaling max = 4
+  h.	Click on health check
+    i.	Create a health check
+    ii.	Name = belgiumhealthcheck01
+    iii.	Description = belgiumhealthcheck01
+    iv.	Check interval = 10
+    v.	Timeout = 10
+    vi.	Unhealthy threshold = 10
+    vii.	Leave rest as is
+  i.	Under auto healing click “on failed health check” and click repair instance
+  j.	Create
+21.	Create instance group
+  a.	Name = tokyoinstancegroup01
+  b.	Description = tokyoinstancegroup01
+  c.	Instance template = globalvpctemplate01
+  d.	Location = multiple zones
+  e.	Region = asianortheast1
+  f.	Autoscaling min = 2
+  g.	Autoscaling max = 4
+  h.	Click on health check
+    i.	Create a health check
+    ii.	Name = belgiumhealthcheck01
+    iii.	Description = belgiumhealthcheck01
+    iv.	Check interval = 10
+    v.	Timeout = 10
+    vi.	Unhealthy threshold = 10
+    vii.	Leave rest as is
+  i.	Under auto healing click “on failed health check” and click repair instance
+  j.	Create
+
+22.	Search Load Balancer
+23.	Name = GlobalvpcLB
+  a.	Create Load balancer
+  b.	Application load balancer
+  c.	Public facing
+  d.	Global
+  e.	Global
+  f.	Click next and then configure
+24.	Front end name = beligumfrontend01
+  a.	Description = beligumfrontend01
+  b.	Show advanced features
+  c.	http timeout = 60
+25.	Back end configuration
+  a.	Name = belgiumbackend01
+  b.	Description = belgiumbackend01
+  c.	Instance group = globalinstancegroup01
+  d.	Port = 80
+  e.	Scroll down to health check
+  f.	Create health check
+  g.	Health check name = belgiumhealthcheckbackend
+  h.	Description = belgiumhealthcheckbackend
+  i.	Check interval = 10
+  j.	Timeout = 10
+  k.	Click create
+26.	Create another back end configuration 
+  a.	Name = tokyobackend01
+  b.	Description = tokyobackend01
+  c.	Instance group = tokyoinstancegroup01
+  d.	Port = 80
+  e.	Scroll down to health check
+  f.	Use belgiumhealthcheckbackend
+  g.	Click create
+27.	Click on routing rules
+  a.	Host = *
+  b.	Path = /
+  c.	Click create
+28.	Open new tab
+29.	search vpc networks
+30.	click globaclvpc01
+31.	add firewall rule
+  a.	name = globalvpcapp01port80
+  b.	description = globalvpcapp01port80
+  c.	network = globaclvpc01
+  d.	targets = specified target tags
+  e.	target tags = tags created from both instance templates (globalvpcapp01& tokyohttp01)
+  f.	source IPv4 ranges = 0.0.0.0/0
+  g.	protocols and ports
+  h.	click TCP
+    i.	port = 80
+    ii.	create
+32.	Click on the load balancer you just made
+33.	Copy the IP address without the 80
+34.	Open browser and type http://<IP address>
+35.	Click refresh to make sure zones change
+
+Teardown:
+1.	Delete Load balancer BY ITSELF (don't check any boxes when deleting LB)
+  a.	Front end is deleted automatically
+2.	Load balancer back end
+3.	Instance groups
+4.	Load balancer health check
+5.	Cloud NATs
+6.	Cloud routers
+7.	instance templates
+8.	VPC
