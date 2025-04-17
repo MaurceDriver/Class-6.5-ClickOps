@@ -1,0 +1,132 @@
+1.	Create a VPC
+2.	Name = tokyohq
+3.	Descriptionhq = tokyohq
+4.	Custom subnet creation mode
+  a.	New subnet name = tokyohq
+  b.	Description = tokyohq
+  c.	Region = asia-northeast1
+  d.	iPv4 single stack
+  e.	Ipv4 range = 10.25.96.9/24
+  f.	Private google access = on
+  g.	Flow logs = on
+5.	Add secondary subnet 
+  a.	Name = tokyohqpii
+  b.	IPv4 range = 10.25.97.0/24
+6.	Create new subnet
+  a.	Subnet name = sapaolo
+  b.	Description = sapaolo
+  c.	Region = southamerica-east1
+  d.	IPv4 single stack
+  e.	IPv4 range = 10.25.48.0/24
+  f.	Private google access = on
+  g.	Flow logs = on
+7.	Create new subnet 
+  a.	Subnet name = iowacornfield
+  b.	Description = iowacornfield
+  c.	Region = us-central1
+  d.	Ipv4 range = 10.25.250.0/24
+  e.	IPv4 single stack
+  f.	Private google access = on
+  g.	Flow logs = on
+8.	Dynamic routing mode = Global
+9.	Search Compute Engine
+10.	Create VPC
+11.	Create Instance
+  a.	Name = iowahusker
+  b.	Region = us-central1
+  c.	Series = N2
+  d.	On side panel click OS & Storage
+  e.	Click Change
+    i.	Operating system = Windows Server
+    ii.	Version = Windows server 2022 datacenter
+    iii.	Keep everything else as is
+  f.	Click networking
+    i.	Click arrow under network interfaces to edit
+    ii.	Change network from Default to Tokyhq
+    iii.	Subnet will automatically populate
+    iv.	Leave the rest as is
+    v.	Click Create at bottom
+12.	Create Instance
+  a.	Name = saopaolowindows
+  b.	Region = soutamerica-east1
+  c.	Series = N2
+  d.	On side panel click OS & Storage
+  e.	Click Change
+    i.	Operating system = Windows Server
+    ii.	Version = Windows server 2022 datacenter core
+    iii.	Keep everything else as is
+  f.	Click networking
+    i.	Click arrow under network interfaces to edit
+    ii.	Change network from Default to Tokyhq
+    iii.	Subnet will automatically populate
+    iv.	Leave the rest as is
+    v.	Click Create at bottom
+13.	Create Instance
+  a.	Name = tokyowww
+  b.	Region = asia-northeast1
+  c.	Series = N2(not needed but you can use here)
+  d.	On side panel click OS & Storage
+  e.	Click Change
+  i.	Operating system = Debian so don’t change anything
+  f.	Click networking
+    i.	Click arrow under network interfaces to edit
+    ii.	Change network from Default to Tokyhq
+    iii.	Subnet will automatically populate
+    iv.	DON’T CREATE JUST YET
+14.	Go to this github and fork the repo
+15.	https://github.com/DarthBane2025/GCP-startup-script-template
+16.	Click on repo and click on new-class-template.sh
+17.	Click 2 boxes next to Raw to copy script
+18.	Go Back to VM Instance
+  a.	Click Advanced
+  b.	Paste script in Automation box
+  c.	Create instance
+19.	On the main VM instances screen look for Connect column to the right
+  a.	Next to the first RDP click the drop down arrow and download RDP file
+  b.	Next to the second RDP click the drop down arrow and download RDP file
+20.	In downloads click on iowahusker
+  a.	It will be unable to connect because of the firewall rules
+21.	Go back to first tab
+22.	Click on Firewall
+  a.	Create a firewall rule
+  b.	Name = rdptoiowa
+  c.	Description = rdptoiowa
+  d.	Network = tokyhq
+  e.	Priority = 1000
+  f.	Traffic = ingress
+  g.	Targets = All instances in the network
+  h.	Source = 0.0.0.0/0
+  i.	Click TCP
+  i.	Ports = 3389
+  j.	Click create
+23.	Click on iowacornhusker in download
+  a.	Log in with your computer credentials
+  b.	Close rdp window
+24.	Go to VM instances
+25.	Click on drop down arrow next to iowahusker
+  a.	Click set windows password
+  b.	Leave user name as is and click set
+  c.	Copy password
+  d.	Open iowahusker from downloads again
+  e.	Paste password into rdp login window
+  f.	Log in again
+26.	Minimize server manager browser
+27.	Open downloads folder
+28.	Copy Saopaolo rdp download 
+29.	Paste onto Windows desktop screen
+30.	Double click on saopaolo instance to connect
+31.	Enter credentials
+32.	Go back to GCP consoled and click drop down arrow next to saopaolo instance and click set windows password. 
+33.	Click set
+34.	Copy new password 
+35.	Paste into RDP login
+36.	Click yes when pop up shows up
+37.	Open web browser in RDP
+38.	Go back to GCP and search firewall
+39.	Create new firewall rule 
+40.	Name it whatever
+  a.	Targets = all specified targets
+  b.	Source range will be 10.25.0.0/16
+  c.	Scroll down and Click TCP
+    i.	Port 80
+  d.	Leave everything else as is
