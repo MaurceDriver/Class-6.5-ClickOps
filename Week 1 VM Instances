@@ -1,0 +1,24 @@
+1.        Search for VM Instances (EC2 in AWS)
+2.        Click Blue Button “Create Instance”
+3.        VM Instance has default name but you can name it whatever
+4.        Click on region 
+    a.        AWS: VPCs are regional; subnets are zonal
+    b.        GCP: VPCs are global, subnets are regional: Zone = Data Center; Region = City
+    c.        Not all Regions have all services. Newer regions have less services than older and not all zones have all services. Test both first to see what’s available
+    d.        Central Iowa is one of cheapest places 
+    e.        Only use E2 or N1 “Series”
+5.        OS and Storage use “Debian” as default
+6.        Data Protection tab click “no backups”
+7.        Networking tab Is for Security Groups
+    a.        Click “Allow HTTP traffic”
+8.        Keep Observability, Security & Advanced tabs as default
+9.        Click Create
+    a.        You will be charged for external IP so on tear down delete instance & external IP
+10.       Click Connect SSH to see if connection to instance is working
+    a.        Click Authorize
+    b.        ping 8.8.8.8
+    c.        control z to quit ping
+    d.        hit up arrow to ping again
+    e.        We ping to prove we have a connection
+11.       Click Instance and more actions. 
+          Click delete
