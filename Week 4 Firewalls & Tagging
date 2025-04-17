@@ -1,0 +1,103 @@
+1.	Open GCP project
+2.	 Create a VPC
+3.	Name = apriltruth
+4.	Description = apriltruth
+5.	Create new subnet
+  a.	Name = tokyouser
+  b.	Description =tokyouser
+  c.	Region = asia-northwest
+  d.	IPv4 range = 10.25.96.0/24
+  e.	Add a secondary IPv4 range
+  f.	Name = tokyowww
+  g.	Range = 10.25.97.0/24
+  h.	Google access = on
+  i.	Flow logs = on
+6.	Create new subnet
+  a.	Name = saopalo
+  b.	Description =saopaolo
+  c.	Region = southamerica-east1
+  d.	IPv4 range = 10.25.48.0/24
+  e.	Add a secondary IPv4 range
+  f.	Name = saopaolowww
+  g.	Range = 10.25.49.0/24
+  h.	Google access = on
+  i.	Flow logs = on
+7.	Create new subnet
+  a.	Name = iowacornfielduser
+  b.	Description = iowacornfielduser
+  c.	Region = us-central1
+  d.	IPv4 range = 10.25.250.0/24
+  e.	Add a secondary IPv4 range
+  f.	Name = iowacornfieldwww
+  g.	Range = 10.25.251.0/24
+  h.	Google access = on
+  i.	Flow logs = on
+8.	Dynamic routing mode = regional
+9.	Best path selection mode = legacy
+10.	Click create
+11.	Search compute engine
+12.	Create instance
+13.	Name = iowauser1
+14.	Region = us-central1
+15.	Zone = us-central-a
+16.	Series = N2
+17.	OS & stoage
+  a.	Click change
+  b.	Operating system = windows server
+  c.	Version =  windows server datacenter 2022
+18.	Click on networking
+  a.	Network tags = iowauser
+  b.	Edit network interface
+  c.	Change network from default to apriltruth
+  d.	Leave rest as it
+19.	Create another instance
+20.	Name = saopaolouser
+21.	Region = southamerica-east1
+22.	Zone = southamerica-east1-a
+23.	Series = Can be an E2 (low cost & web server)
+24.	OS & storage
+  a.	Keep it as Debian
+  b.	Operating system = windows server
+  c.	Version = windows server datacenter 2022
+25.	Click on networking
+26.	Network tags = saopaolouser
+  a.	Edit network interface
+  b.	Change network from default to apriltruth 
+  c.	Leave rest as it
+27.	 Click on advanced
+  a.	Paste startup script from github in the automation box
+  b.	Create instance
+28.	Go to your already made VM Instances
+29.	Open another tab and search Firewall
+30.	Create new firewall rule
+31.	Name = rdptoiowa
+32.	Description = rdptoiowa
+33.	Network = apriltruth
+34.	Targets = specified target tags
+35.	Target tags = iowauser
+36.	Source filter = IPv4 ranges
+37.	Source IPv4 ranges = 0.0.0.0/0
+38.	Second source filter = none
+39.	Destination filter = none
+40.	Click TCP
+  a.	Port 3389
+41.	Click create
+42.	Create another firewall rule
+43.	Name = webserverhttp
+44.	Description = webserverhttp
+45.	Network = apriltruth
+46.	Targets = specified target tags
+47.	Target tags = saopaolouser
+48.	Source filter = source tags
+49.	Source tags = iowauser
+50.	Second source filter = none
+51.	Destination filter = none
+52.	Click TCP
+  a.	Port 80
+53.	Click create
+54.	Go to VM instances and click the drop down arrow next to RDP and click set windows password
+55.	Click set and copy new password
+56.	Click RDP next to iowauser
+57.	Go to downloads and open RDP iowauser file
+58.	Paste password as your credentials
+59.	Open web browser and enter http://<private IP from saopaolo>
