@@ -1,0 +1,99 @@
+** THESE INSTRUCTIONS ARE ALTERED SLIGHTLY (FOR MAC USERS) FROM OUR CLASSMATE LARVARIOUS. HOWEVER INTRUCTIONS CAN BE FOLLOWED BY BOTH WINDOWS/MAC USERS. THANK YOU SIR!
+
+Here is a list of CLI Commands To Know For The Future, we will be using these later
+
+{
+
+pwd: Print the current working directory,
+ls: List directory contents,
+cd: Change directory,
+mkdir: Create a new directory,
+rmdir: Remove an empty directory,
+touch: Create a new empty file,
+cp: Copy files or directories,
+mv: Move or rename files or directories,
+rm: Delete files or directories,
+cat: View file contents,
+nano: Open file in Nano text editor,
+chmod: Change file permissions,
+chown: Change file owner or group,
+echo: Display a message or variable,
+clear: Clear the terminal screen
+
+}
+Very Important CLI Commands To Remember In Order To Push/Update Files To An Online GitHub Repository"
+
+{
+1. git init
+2. git status
+3. git add [filenmame], or git add . 👈 [to add multiple files]
+4. git status
+5. git commit -m "add a comment here"
+6. git branch -M main
+7. git remote add origin "your github repository url link here"
+8. git push -u origin main
+}
+Open Gitbash on your Windows, or Terminal on your Mac. (DON'T USE POWERSHELL!!!)
+
+Inside your Terminal, type in PWD (Present Working Directory) to find your current location. You need to change my current location to the Documents folder.
+
+To navigate to the Documents folder, you need to list the directories, and change directories one by one. To list directories, type the command LS.
+
+The listed directories will be shown from the previous command and now we see our Documents folder, let's input the command cd Documents/ to change the location to Documents.
+Then, input the command 👉 pwd to see your current location, and input the command ls, to list your directories and files in the Documents folder.
+
+Input the command cd TheoWAF/ to change our location to TheoWAF folder. Input the following command ls, to list the directories in the TheoWAF folder. We're looking for the folder called class6.5. So input the command cd class6.5/ to change directory location to that folder.
+(If you do not have a folder named TheoWaf you need to create one and all subsequent folders. Inside your documents folder type mkdir TheoWaf. Click enter then type cd Theowaf. The type mkdir class6.5, click enter. Then type cd class6.5. Type mkdir gcp, click enter. Type cd gcp. Finally type mkdir terraform, click enter then type cd terraform)
+
+If you already have a TheoWaf folder then enter the following commands: cd class6.5, cd gcp, cd terraform. Once inside the terraform folder you can see no content and this is our destination!
+
+In GitBash, this is the folder you're going to store your current repo 👉 cd Users/Documents/TheoWAF/class6.5/GCP/Terraform/
+
+In your terraform directory you can create a new folder with mkdir command, call it whatever you want so it will look like <mkdir whateveryouwant> but without the greater/less than signs. Then input the command ls to confirm that you've created the directory.
+
+Open your browser, and type in the url address https://www.github.com, go to your github, click on repositories, and click on the New button to create a new repository.
+
+Create a new repo, name it whatever, make it a Public Repo, click on Create Repo.
+
+On this page that says "Quick setup - if you've done this kind of thing before", DON'T CLOSE IT THIS PAGE OR TAB!!! YOU WILL NEED COMMANDS THAT ARE LISTED ON THIS PAGE
+
+You will see a similar .git under quick setup copy it to your notepad, along with the commands that follow it
+
+https://github.com/MaurceDriver/whateveryouwant.git
+
+Go back to your terminal, and input the command git clone "https:github.com/YOURUSERNAME/REPO.GIT" to clone your repo from Github to the folder location you've created inside terraform in the CLI.
+
+Add a file to your repo from gitbash, by inputting this command 👉 echo "# sample1" >> README.md , then run this command ls to confirm that the file has been created.
+
+Add another file of your choice and add custom text to the file by doing this by checking the end of the echo command 👉 echo "i dont know" >> idontknow.txt. You can read what the txt file contains by inserting the command -> cat idontknow.txt
+
+We now have two files inside our repo, and the next objective is to push these files from Gitbash to GitHub. In order to accomplish that, go to your Gitbash terminal, make sure you're still located in the repo folder by inserting this command -> pwd, then insert the command 👉'git init' to initialize your GitHub.
+
+Next, we're going to check the status of our Git Repository to see what files are being tracked and what files are not being tracked, by inserting this command 👉 git status. You will have two files that are not being tracked on our local machine, and you need to track them from our local machine to the internet in order to push them to GitHub.
+
+In order to track these two files and push them to the GitHub you have to add all files by inserting this command 👉 git add . Make sure you put a space before the period
+
+Let's now check and see if the two files are now being tracked so that you can commit and push them to our GitHub repository, by inserting this command again -> git status
+
+You now have both files being tracked and they are now ready to be commited to our online GitHub Repository, you can commit them by inserting this command 👉 git commit -m "first commit". SIDE-NOTE: Each time you commit files to an online GitHub Repository, give a clear and concise reason as to why you're committing these files to the GitHub Repository where it says "first commit", because you may be working with a team or other individuals and they need to know what changes were made, in case they may need to revert back to older files in case there was a mistake. VERY IMPORTANT!
+You might run across an error that tells you that "Author identity unknown". This means that my GitBash does not know who you are, and you need to identify myself first from GitHub.
+
+In order to remedy this error, you need to configure your GitHub account to the GitBash terminal, and you can do that by inserting the command -> git config --global user.name [YOUR GITHUB USERNAME], and git config --global user.email [YOUR GITHUB EMAIL ASSOCIATED WITH GITHUB]. You can verify that our GitHub account is associated with our GitBash terminal by running these two commands, 👉 git config user.name, and 👉 git config user.email
+
+Now, let's try to run the command 👉 git commit -m "first commit" again to see if it works. Both files have now been committed to our GitHub Repository.
+
+Let's set our correct branch in the GitHub Repository, by running this command 👉 git branch -M main
+
+Now you need to go back to your open github tab to locate our GitHub Repository link or your notepad if you coped it, and run this next command in GitBash 👉 git remote add origin https://github.com/MaurceDriver/whateveryouwant.git.
+
+You might receive annerror message because you've already associated this folder from GitHub earlier in one of our steps. If you receive this error message or not, please continue. 
+
+Finally, we're ready to push these files from our local machine to our online GitHub Repository. Run this final command to push those said files 👉 git push -u origin main
+After running this command, you may receive a dialogue box requesting you to sign in to GitHub on Windows. Click on [Sign on with Browser]
+
+*** On a Mac you may get a similar but different error and it may ask for your username and password. Username = your github user name but password is a Personal Access Token you need to create. Go to your github account. At the top right click on your icon and scroll down to settings
+After click on settings scroll to the bottom and on the left you will see developer settings, click on that. On the left click on Personal Access Tokens (classic). Name it whatever and generate the token at the bottom. Once generated copy the password and paste into your terminal. Then click enter
+
+You will receive a code in your terminal when your files have been pushed to the online GitHub Repository.
+
+You can confirm in your github repo if our files have been pushed to our GitHub Repository.
