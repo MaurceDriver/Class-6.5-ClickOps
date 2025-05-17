@@ -14,10 +14,10 @@
  k.	Click to open your newly made service account
  l.	At the top click on keys
  m.	Click add key, create new key, leave it as a JSON and click create. It will automatically download to your computer
-5.
+5. Create a new storage bucket with default settings and name whatever you like.
 
-4.	Open your terminal
-5.	Create new Folder by the following commands
+6.	Open your terminal
+7.	Create new Folder by the following commands
  a.	First type pwd then enter to see where you are
  b.	Make sure you’re at least on your desktop or downloads and not c drive. I made my folder in my downloads
  c.	Next type mkdir gcp then click enter
@@ -27,18 +27,27 @@
  g.	From here you can either go to downloads, right click on the key that was downloaded from the google console and select open with VSC or you can drag the downloaded key from downloads to your newly made terraform folder. Then in your terminal type code . then your VSC will open
 
 
-6.	Use the following github repo to help write your code in terraform:
+8.	Use the following github repo to help write your code in terraform:
  a.	https://github.com/MookieWAF/gcp_basic
-7.	In VSC click open folder and go to folders you just created through the terminal and click open.
-8.	Click create a new file 
+9.	In VSC click file open folder and go to folders you just created through the terminal and click open.
+10.	Click create a new file 
  a.	Name of file = 0-authentication.tf
- b.	From the github copy the authentication script and copy into the VSC 0-authentication.tf
+ b.	From the github repo copy the 0-authentication.tf script and copy it into your 0-authentication.tf on VSC
  c.	Click save
- d.	Open terminal in VSC, in the terminal type in terraform init and click enter
- e.	Create a new file
+ d.	Open a new terminal in VSC. You can go to top of VSC and click Terminal, then new terminal. In the terminal type in terraform init and click enter. You will receive a successfully initialized message
+ e.	Create another new file
  f.	Name of file = 1-backend.tf
- g.	From the github copy the backend script and copy into the VSC 1-backend.tf
- h.	Change the name of the bucket to name of the bucket we made at the beginning.
- i.	Copy credentials from 0-authentication.tf and paste into 1-backend.tf
+ g.	From the github repo copy the 1-backend.tf script (only lines 1 to 13) and copy it into your 1-backend.tf on VSC. Click save
+ h.	Change the name of the bucket to name of the bucket on like 4 to the bucket name you created earlier.
+ i.	Go to your 0-authentication.tf file and copy the entire line 5 which is your credentials and paste it right under line 5 in your 1-backend.tf file.
  j.	Click save
- k.	Run terraform init interminal
+ k.	Run terraform init inside your terminal
+11. Create another new file and name it 2-vpc.tf
+ a. Copy the 2-vpc.tf script from the github repo (only lines 10 to 16 AND add a curly bracket "}" after the world false) and paste into your 2-vpc.tf file on VSC.
+12. Next to resource you'll see the word "main". Change the name to whatever you want. Then on the next line change the other "main" to the exact same name as the previous. Click Save
+13. In your terminal enter terraform validate, then terraform plan, then terraform apply. It will prompt you to type in yes
+14. Your VPC and all files should be spinning up at this point. 
+15. If you would like to add another VPC to the 2-vpc.tf file. All you need to do is copy the sames lines (10 to 16) from the 2-vpc.tf github repo and paste under your first vpc script. Make a new line after the curly bracket and then paste. Click save
+16. Run terraform plan, then terraform apply.
+17. To destroy everything run terraform destroy. It will prompt you to type in yes.
+
